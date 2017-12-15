@@ -10,10 +10,12 @@
             position: absolute;
         }
 
-        div {
+        #chatBot {
             position: absolute;
             right: 0;
-            bottom: 0;
+            bottom: 73px;
+            height: 300px;
+            width: 400px;
         }
 
         input {
@@ -26,6 +28,18 @@
 
         textarea {
             width: 100%;
+            height: 88%;
+        }
+        #speakBar {
+            display: flex;
+            flex-direction: row;
+        }
+        #chatBotHead {
+            top: 0;
+            width: 100%;
+            background-color: #ddddff;
+            text-align: center;
+            padding: 10px;
         }
 
     </style>
@@ -37,10 +51,15 @@
 <iframe id="site" width="100%" height="100%" src="https://sushishop.fr"></iframe>
 .com/api-client/demo/embedded/7f79e29c-08f4-4d87-93a3-90f7a763f48e">
 
-<div>
-    <input id="input" type="text">
-    <button id="rec">Speak</button>
-    <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>
+<div id="chatBot">
+    <div id="chatBotHead">
+        <p>Sushi Bot</p>
+    </div>
+        <textarea id="response"></textarea>
+    <div id="speakBar">
+        <input id="input" type="text">
+        <button id="rec">Speak</button>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -82,7 +101,7 @@
             recognition.onend = function () {
                 stopRecognition();
             };
-            recognition.lang = "en-US";
+            recognition.lang = "fr";
             recognition.start();
         }
 
@@ -127,7 +146,7 @@
                     console.log(data.result.metadata.intentName);
                     setResponse(data.result.fulfillment.speech);
                     if (data.result.metadata.intentName === "voirSushi") {
-                        console.log('if');
+
                         $('iframe').attr('src', 'https://www.sushishop.fr/fr/all-categories');
                         //$('#response').text(data.result.fulfillment.speech)
                     } else if (data.result.metadata.intentName === "voirDetailBoxe") {
