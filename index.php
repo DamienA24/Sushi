@@ -125,17 +125,15 @@
                 success: function (data) {
                     setResponse(JSON.stringify(data, undefined, 2));
                     console.log(data.result.metadata.intentName);
+                    setResponse(data.result.fulfillment.speech);
                     if (data.result.metadata.intentName === "voirSushi") {
                         console.log('if');
                         $('iframe').attr('src', 'https://www.sushishop.fr/fr/all-categories');
-                        setResponse(data.result.fulfillment.speech);
                         //$('#response').text(data.result.fulfillment.speech)
                     } else if (data.result.metadata.intentName === "voirDetailBoxe") {
                         $('iframe').attr('src', 'https://www.sushishop.fr/fr/livraison/california-rolls');
-                        setResponse(data.result.fulfillment.speech);
                     } else if (data.result.metadata.intentName === "home") {
                         $('iframe').attr('src', 'https://sushishop.fr');
-                        setResponse(data.result.fulfillment.speech)
                     }
                 },
                 error: function () {
